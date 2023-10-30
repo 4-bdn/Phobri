@@ -661,9 +661,22 @@ void changeTournamentToggle(Buttons &btn, Buttons &hardware, ControlConfig &cont
 //apply digital button swaps for L, R, or Z jumping
 void applyJump(const ControlConfig &controls, const Buttons &hardware, Buttons &btn){
 	switch(controls.jumpConfig){
+    case FIX_Z2:
+      btn.Z = hardware.Z or hardware.Z2;
+      btn.X = hardware.X;
+      btn.Y = hardware.Y;
+      break;
 		case SWAP_XZ:
 			btn.X = hardware.Z;
 			btn.Z = hardware.X;
+			break;
+    case SWAP_XZL:
+			btn.X = hardware.Z2;
+			btn.Z2 = hardware.X;
+			break;
+    case SWAP_YZL:
+			btn.Y = hardware.Z2;
+			btn.Z2 = hardware.X;
 			break;
 		case SWAP_YZ:
 			btn.Y = hardware.Z;
@@ -701,6 +714,15 @@ void setJumpConfig(JumpConfig jumpConfig, ControlConfig &controls){
 		switch (jumpConfig) {
 			case SWAP_XZ:
 				debug_println("X<->Z");
+				break;
+      case SWAP_XZL:
+				debug_println("X<->ZL");
+				break;
+      case FIX_Z2:
+				debug_println("Z2 Reset");
+				break;
+      case SWAP_YZL:
+				debug_println("Y<->ZL");
 				break;
 			case SWAP_YZ:
 				debug_println("Y<->Z");
@@ -2031,7 +2053,23 @@ void processButtons(Pins &pin, Buttons &btn, Buttons &hardware, ControlConfig &c
 			settingChangeCount++;
 			setJumpConfig(SWAP_YZ, controls);
 			freezeSticks(2000, btn, hardware);
-		} else if(hardware.X && hardware.L && hardware.S) { //Swap X and L
+		}
+    else if(hardware.X && hardware.Z2 && hardware.S) { //Swap X and Z
+			settingChangeCount++;
+			setJumpConfig(SWAP_XZL, controls);
+			freezeSticks(2000, btn, hardware);
+		}
+    else if(hardware.Z && hardware.A) { //reset Z2 X Y to default
+			settingChangeCount++;
+			setJumpConfig(FIX_Z2, controls);
+			freezeSticks(2000, btn, hardware);
+		}
+    else if(hardware.Y && hardware.Z2 && hardware.S) { //Swap X and Z
+			settingChangeCount++;
+			setJumpConfig(SWAP_YZL, controls);
+			freezeSticks(2000, btn, hardware);
+		}
+     else if(hardware.X && hardware.L && hardware.S) { //Swap X and L
 			settingChangeCount++;
 			setJumpConfig(SWAP_XL, controls);
 			freezeSticks(2000, btn, hardware);

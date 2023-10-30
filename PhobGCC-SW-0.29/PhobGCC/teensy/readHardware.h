@@ -54,7 +54,8 @@ void readButtons(const Pins &pin, Buttons &hardware) {
 	hardware.Y = !digitalRead(pin.pinY);
 	hardware.L = !digitalRead(pin.pinL);
 	hardware.R = !digitalRead(pin.pinR);
-	hardware.Z = !digitalRead(pin.pinZ) or !digitalRead(pin.pinZ2);
+	hardware.Z = !digitalRead(pin.pinZ); //or !digitalRead(pin.pinZ2);
+  hardware.Z2 = !digitalRead(pin.pinZ2);
 	hardware.S = !digitalRead(pin.pinS);
 	hardware.Du = !digitalRead(pin.pinDu);
 	hardware.Dd = !digitalRead(pin.pinDd);

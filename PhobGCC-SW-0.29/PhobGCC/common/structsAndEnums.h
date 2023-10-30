@@ -10,7 +10,10 @@ enum JumpConfig {
 	SWAP_XL,
 	SWAP_YL,
 	SWAP_XR,
-	SWAP_YR
+  SWAP_XZL,
+  SWAP_YZL,
+	SWAP_YR,
+  FIX_Z2
 };
 
 enum WhichTrigger {
@@ -110,6 +113,7 @@ union Buttons{
 		uint8_t Dd : 1;
 		uint8_t Du : 1;
 		uint8_t Z : 1;
+    uint8_t Z2 : 1;
 		uint8_t R : 1;
 		uint8_t L : 1;
 		uint8_t high : 1;
