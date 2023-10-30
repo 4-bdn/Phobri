@@ -1,3 +1,7 @@
+Edited 0.29sw to allow for ZL to be rebound to X/Y and to unbind X/Y when doing so, since I was told having ZL rebound to X/Y was illegal.
+To undo, do the button combo ZR + A. This will reset ZL ZR X Y to their default settings, so if you have a trigger jump bind reset it before doing this.
+Its a kinda janky solution and I'm not too happy with it, but it ""works"" which is all i can really ask for tbh.
+
 # Phobri
 Repository for a modification of the Phob motherboard to fit an Hori Pad GCC
 
